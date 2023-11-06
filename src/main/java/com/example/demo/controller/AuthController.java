@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.demo.dao.UserDao;
 
 import com.example.demo.model.AuthResponse;
+import com.example.demo.model.UserInfoOutput;
 import com.example.demo.model.UserOutput;
 import com.example.demo.service.UserService;
 import com.example.demo.service.serviceimpl.AuthServiceImpl;
@@ -36,15 +37,20 @@ public class AuthController {
 
     //USER LOGIN CONTROLLER
     @PostMapping("/loginUser")
-    public String userlogin(@RequestParam String username, @RequestParam String password, Model model) {
+    public String userlogin(@RequestParam String username, @RequestParam String password, Model model, HttpSession httpSession) {
         UserOutput user = userDao.getByUsername(username);
         AuthResponse response = authService.authUser(username, password);
 
         if (response.isSuccess() && user != null) {
             // Successful login
+            UserInfoOutput principal = userService.getUserById(user.getEmp_id());
+            //stores the user in httpSession.
+            httpSession.setAttribute("principal", principal);
             model.addAttribute("success", "Login Successfully");
+            //stores the session in the model.
+            model.addAttribute("principal", httpSession.getAttribute("principal"));
             model.addAttribute("user", userService.getUserById(user.getEmp_id()));
-            return "redirect:/user/" + user.getEmp_id();
+            return "redirect:/user/" + principal.getEmp_id();
 
         } else {
             // Failed login

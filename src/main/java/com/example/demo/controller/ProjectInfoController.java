@@ -16,6 +16,8 @@ import com.example.demo.model.UserInfoOutput;
 import com.example.demo.service.ProjectService;
 import com.example.demo.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/user-project")
 public class ProjectInfoController {
@@ -28,9 +30,11 @@ public class ProjectInfoController {
     // String proj_id = "2";
     
     @GetMapping("/{projId}")
-    public String index (@PathVariable String projId, Model model) {
+    public String index (@PathVariable String projId, Model model, HttpSession httpSession) {
 
         model.addAttribute("content", "fragments/Project :: Project");
+        //stores the session on model.
+        model.addAttribute("principal", httpSession.getAttribute("principal"));
         model.addAttribute("projectInfo", projectService.getAttributesOfProject(projId));
         model.addAttribute("clientName", projectService.getClientOfProject(projId));
         model.addAttribute("devPhase", projectService.getAllPhasesOfProject(projId));
