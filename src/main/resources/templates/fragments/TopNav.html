@@ -1,0 +1,21 @@
+<nav class="navbar" th:fragment="TopNav" style="height: 100%">
+  <div class="container-fluid nav-container">
+    <div class="title-back-container">      
+      
+      <Typography style="font-size: 30px; font-weight: bolder;" class="navbar-brand">USER MICRO SERVICE</Typography>
+    </div>
+
+
+      <div class="user-logout-container">
+        <Typography style="text-align: center; font-weight: bold"> 
+          <!-- th:text="${userInfo.username}" -->
+          afabre
+        </Typography>
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Logout
+        </button>
+        <!-- Modal -->
+        <div th:replace= "~{fragments/LogoutModal :: logoutModal }"></div>
+      </div>
+  </div>
+</nav>

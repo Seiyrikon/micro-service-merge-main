@@ -1,0 +1,156 @@
+<a th:href="@{/user/101}">CLICK TO GO TO USER PAGE</a>
+<div th:fragment="Project" class="frag">
+    <!-- CARD 1 -->
+    <div class="main-card-container1" style="border: 1px solid blue;">
+        <div class="container1"  style="border: 1px solid red;">
+            <!-- PROJECT NAME -->
+            <!-- <div class="project-name">
+                <Typography style="font-size: 30px; color: white;">Project Name </Typography>
+            </div>
+            <div class="proj-text" style="border: 1px solid red;"> 
+                <Typography style="font-size: 30px; font-weight: bold;" th:text="${projectInfo.proj_name}"></Typography>
+            </div> -->
+            <div class=".project-name-container"> 
+                <div class="project-title">
+                    <Typography style="font-size: 30px; color: white;">Project Name </Typography>
+                </div>
+                <div class="project-body">
+                    <Typography style="font-size: 30px;" th:text="${projectInfo.proj_name}"></Typography>
+                </div>
+            </div>
+             <!-- PROJECT CODE/STATUS -->
+            <div class="proj-code-status"> 
+                <Typography>Project code: 
+                    <span th:text="${projectInfo.proj_code}"></span>
+                </Typography>
+                <Typography> Project status: 
+                    <span th:text="${status.status_code}"></span>
+                </Typography>
+            </div>
+
+            <div class="date-desc-container">
+                <!-- PROJECT DURATION -->
+                <div class="proj-duration-container"> 
+                    <div class="proj-duration">
+                        <Typography style="font-size: 30px; color: white;"> PROJECT DURATION</Typography>
+                    </div>
+                    <div class="date-container">
+                        <div class="start-date-container">
+                            <Typography style="font-size: 15px;">
+                                START DATE
+                            </Typography>
+                            <Typography style="font-size: 17px; font-weight: bold;" th:text="${projectInfo.start_date}">
+                            </div>
+                            
+                        <div class="end-date-container">
+                            <Typography style="font-size: 15px;">
+                                END DATE
+                            </Typography>
+                            <Typography style="font-size: 17px; font-weight: bold;" th:text="${projectInfo.end_date}">
+                    </div>
+                    </div>
+                </div>
+    
+                <!-- DESCRIPTION -->
+                 <div class="main-desc-container"> 
+                    <div class="desc-title">
+                        <Typography style="font-size: 30px; color: white;"> PROJECT DESCRIPTION</Typography>
+                    </div>
+                    <div class="desc-body">
+                        <div th:text="${projectInfo.proj_desc}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2 -->
+    <div class="main-card-container2">
+        <div class="client-container"> 
+            <div class="client-title">
+                <Typography style="font-size: 30px; color: white;">CLIENT </Typography>
+            </div>
+            <div class="client-body">
+                <Typography style="font-size: 30px;" th:text="${clientName.client_name}"></Typography>
+            </div>
+        </div>
+
+        <div class="main-manager-member">
+            <div class="manager-container">
+                <div class="manager-title">
+                    <Typography style="font-size: 30px; color: white;">MANAGER </Typography>
+                </div>
+                <div class="manager-body"> 
+                 <!-- MANAGER LIST-->
+                 <ol class="list-group list-group-numbered">
+                    <div th:each="manager_name, iterStat : ${projManager}">
+                        <li class="list-group-item">
+                            <span th:text="${iterStat.count}"></span>. <span th:text="${manager_name.manager_name}"></span>
+                        </li>
+                    </div>
+                </ol>
+                </div>
+            </div>  
+            <div class="member-container">
+                <div class="member-title">
+                    <Typography style="font-size: 30px; color: white;">MEMBERS </Typography>
+                </div>
+                <div class="member-body"> 
+                    <!-- MEMBERS LIST -->
+                    <ol class="list-group list-group-numbered">
+                        <div th:each="member_name, iterStat : ${members}">
+                            <li class="list-group-item">
+                                <span th:text="${iterStat.count}"></span>. <span th:text="${member_name.member_name}"></span>
+                            </li>
+                        </div>
+                    </ol>     
+                </div>
+            </div> 
+        </div>
+        
+        <!-- DEV TYPE, DEV PHASE, TECHNOLOGY -->
+        <div class="dev-tech-container">
+            <div class="accordion" id="accordionExample" style="width: 100%;">
+                <div class="accordion-item">
+                  <Typography style="font-size: 30px;" class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Development Type
+                    </button>
+                  </Typography>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body" style="overflow-y: auto; overflow-x: hidden;">
+                         <!-- LIST -->
+                         <div th:each="type:${devType}" th:text="${type.dev_type_id}"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <Typography style="font-size: 30px;" class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Development Phase
+                    </button>
+                  </Typography>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <!-- LIST -->
+                      <div th:text="${#strings.arrayJoin(devPhase.![dev_phase_name], ', ')}"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <Typography style="font-size: 30px;" class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Technology
+                    </button>
+                  </Typography>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <!-- LIST -->
+                        <div th:text="${#strings.arrayJoin(tech.![tech_name], ', ')}"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,145 @@
+<div th:fragment = "view" style="height: 100%; width: 100%; ">
+
+    
+    <div style="height: 100%; width: 100%; flex-direction: row; display: flex;">
+
+        <!-- CARD 1 -->
+        <div class="card-container-profile">
+            <div class="card-container2">
+                <div class="profile-card">
+                    <div class="custom-title">
+                        <Typhography style="font-size: 30px; color: white;">PERSONAL INFORMATION</Typhography>
+                    </div>
+
+                    <!-- IMAGE -->
+                    <div class="image-container">
+                        <div class="card image-card">
+                            <img th:if="${userInfo.img_src != ''}" th:src="@{/images/__${userInfo.img_src}__}" class="card-img-center image-file" alt="User Image">
+                            <img th:if="${userInfo.img_src == ''}" th:src="@{/images/MaleDefaultProfile.jpg}" class="card-img-center image-file" alt="Default Image">
+                        </div>
+                    </div>
+    
+                    <div class="card-body">
+                        
+                        <!-- PERSONAL INFO CARD -->
+                        <div class="profile-form-container">
+                            <div class="form-container">
+
+                                <div class="title-container">
+                                    <input class="form-control-title p-2 bg-white text-dark title-font" type="text" value="Associate ID:" aria-label="Disabled input example" disabled readonly>
+                                    
+                                    <input class="form-control-title p-2 bg-white text-dark title-font" type="text" value="Username:" aria-label="Disabled input example" disabled readonly>
+            
+                                    <input class="form-control-title p-2 bg-white text-dark title-font" type="text" value="First Name:" aria-label="Disabled input example" disabled readonly>
+            
+                                    <input class="form-control-title p-2 bg-white text-dark title-font" type="text" value="Last Name:" aria-label="Disabled input example" disabled readonly>
+            
+                                    <input class="form-control-title p-2 bg-white text-dark title-font" type="text" value="E-mail:" aria-label="Disabled input example" disabled readonly>
+                                </div>
+            
+                                <div class="value-container">
+                                    <input class="form-control-value p-2 bg-white text-dark value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.emp_id}">
+                                    
+                                    <input class="form-control-value p-2 bg-white text-dark value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.username}">
+            
+                                    <input class="form-control-value p-2 bg-white text-dark value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.fname}">
+            
+                                    <input class="form-control-value p-2 bg-white text-dark value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.lname}">
+            
+                                    <input class="form-control-value p-2 bg-white text-dark value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.email}">
+                                    
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card-container-emp">
+            <div class="card-container2">
+
+                <!-- EMPLOYEE STATUS -->
+                <div class="employee-card" >
+                    <div class="employee-info">
+                        <Typhography style="font-size: 30px; color: white;"> EMPLOYEE STATUS</Typhography>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="employee-form-container">
+                            <div class="form-container">
+
+                                <div class="title-container">
+                                    <input class="form-control-title p-2 bg-white text-dark emp-title-font" type="text" value="Status:" aria-label="Disabled input example" disabled readonly>
+                                    
+                                    <input class="form-control-title p-2 bg-white text-dark emp-title-font" type="text" value="Position:" aria-label="Disabled input example" disabled readonly>
+
+                                    <input class="form-control-title p-2 bg-white text-dark emp-title-font" type="text" value="Roles:" aria-label="Disabled input example" disabled readonly>
+                                </div>
+            
+                                <div class="emp-value-container">
+                                    <input class="form-control-value p-2 bg-white text-dark emp-value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.status_name}">
+                                    
+                                    <input class="form-control-value p-2 bg-white text-dark emp-value-font" type="text" aria-label="Disabled input example" disabled readonly th:if="${userInfo != null}" th:value="${userInfo.position_name}">
+                                    
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed emp-value-font" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                View Roles
+                                            </button>
+                                            </h2>
+                                            <div id="flush-collapseOne" class="accordion-collapse collapse emp-value-font" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div class="accordion-body">
+                                                    <div th:each="role : ${userInfo.user_multi_role.user_multi_role}">
+                                                        <span th:text="${role}"></span>
+                                                        <br />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                            
+                        
+                    </div>
+                </div>
+
+                <!-- PROJECT LIST -->
+                <div class="project-card" >
+                    <div class="project-info">
+                        <Typhography style="font-size: 30px; color: white;"> PROJECT LIST</Typhography>
+                    </div>
+
+                        <div class="proj-list-container">
+                            
+                            <ol class="list-group list-group-numbered">
+                                <div th:if="${projectsOfUser.isEmpty()}">
+                                    <li class="list-group-item">
+                                        <div class="text-center">
+                                            No assigned project
+                                        </div>
+                                    </li>
+                                </div>
+                                <div th:each="project: ${projectsOfUser}">
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <div class="ms-2 me-auto" style="width: 100%;">
+                                            <a th:href="@{/user-project/{projId}(projId=${project.proj_id})}" class="custom-proj-list list-group-item list-group-item-action" th:text="${project.proj_name}"></a>
+                                        </div>
+                                    </li>
+                                </div>
+                            </ol>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

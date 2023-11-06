@@ -1,0 +1,41 @@
+.nav-container {
+    height: 100%; 
+    flex-direction: row; 
+    display: flex;
+    /* border: 1px solid red; */
+}
+
+.title-back-container {
+    /* border: 1px solid black; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-logout-container {
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; 
+    width: 10%; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Set custom size for the button */
+.btn.btn-outline-primary {
+    width: 100px;
+    height: 50px;
+}
+
+/* Default state styles */
+.btn.btn-outline-primary {
+    background-color: transparent;
+    border-color: #19507D;
+    color: #19507D;
+}
+
+/* Hover state styles */
+.btn.btn-outline-primary:hover {
+    background-color: #19507D;
+    color: #fff;
+}
