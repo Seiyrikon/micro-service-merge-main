@@ -1,4 +1,4 @@
-<a th:href="@{/user/101}">CLICK TO GO TO USER PAGE</a>
+<a th:href="@{/user/{id}(id=${userInfo.getEmp_id})}">CLICK TO GO TO USER PAGE</a>
 <div th:fragment="Project" class="frag">
     <!-- CARD 1 -->
     <div class="main-card-container1" style="border: 1px solid blue;">

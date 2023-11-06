@@ -4,6 +4,22 @@
 
 <!-- Mapper for tbl project   -->
 <mapper namespace="com.example.demo.dao.UserDao">
+
+        <!-- Login -->
+        <select id="getByUsername" resultType="com.example.demo.model.UserOutput">
+                SELECT emp_id,
+                username,
+                password,
+                position_id,
+                dept_id,
+                section_id,
+                role_id,
+                status_code,
+                img_src
+                FROM tbl_user
+                WHERE username COLLATE utf8mb4_bin = #{username}
+        </select>
+
         <select id="getUserById" parameterType="java.lang.String" resultType="com.example.demo.model.UserInfoOutput">
                 SELECT users.emp_id,
                        users.username,

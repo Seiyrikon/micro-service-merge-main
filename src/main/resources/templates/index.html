@@ -27,7 +27,7 @@
   <div style="display: flex; justify-content: flex-start; width: 95%; padding-left: 1%;">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a th:href="@{/user/101}">User</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/user/{id}(id=${userInfo.getEmp_id})}">User</a></li>
         <li class="breadcrumb-item active" aria-current="page">User Project</li>
       </ol>
     </nav>
